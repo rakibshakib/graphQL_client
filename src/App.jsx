@@ -15,7 +15,7 @@ const GET_All_Todos = gql`
 `;
 function App() {
   const { loading, error, data } = useQuery(GET_All_Todos, {
-    variables: { completed: true },
+    variables: { completed: undefined },
   });
   console.log({ data });
 
@@ -25,7 +25,7 @@ function App() {
     <>
       <div>
         <h2>This is Simple GraphQL Practice Code</h2>
-        {data?.getTodos?.map((todo) => (
+{/*         {data?.getTodos?.map((todo) => (
           <div
             key={todo?.id}
             style={{
@@ -38,7 +38,27 @@ function App() {
             </p>
             <p>Assigned To: {todo?.user?.name}</p>
           </div>
+        ))} */}
+         <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+      <thead>
+        <tr>
+          <th style={{ border: '1px solid purple', padding: '8px' }}>Title</th>
+          <th style={{ border: '1px solid purple', padding: '8px' }}>Status</th>
+          <th style={{ border: '1px solid purple', padding: '8px' }}>Assigned To</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data?.getTodos?.map((todo) => (
+          <tr key={todo?.id}>
+            <td style={{ border: '1px solid purple', padding: '8px' }}>{todo?.title}</td>
+            <td style={{ border: '1px solid purple', padding: '8px' }}>
+              {todo?.completed ? "Complete" : "Pending"}
+            </td>
+            <td style={{ border: '1px solid purple', padding: '8px' }}>{todo?.user?.name}</td>
+          </tr>
         ))}
+      </tbody>
+    </table>
       </div>
     </>
   );
