@@ -42,6 +42,7 @@ function App() {
          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
       <thead>
         <tr>
+          <th style={{ border: '1px solid purple', padding: '8px' }}>SL</th>
           <th style={{ border: '1px solid purple', padding: '8px' }}>Title</th>
           <th style={{ border: '1px solid purple', padding: '8px' }}>Status</th>
           <th style={{ border: '1px solid purple', padding: '8px' }}>Assigned To</th>
@@ -50,8 +51,16 @@ function App() {
       <tbody>
         {data?.getTodos?.map((todo) => (
           <tr key={todo?.id}>
+            <td style={{ border: '1px solid purple', padding: '8px' }}>{todo?.id}</td>
             <td style={{ border: '1px solid purple', padding: '8px' }}>{todo?.title}</td>
-            <td style={{ border: '1px solid purple', padding: '8px' }}>
+            <td 
+              style={{
+                border: '1px solid purple',
+                padding: '8px',
+                backgroundColor: todo?.completed ? '#d4edda' : '#f8d7da',
+                color: todo?.completed ? '#155724' : '#721c24'
+              }}
+            >
               {todo?.completed ? "Complete" : "Pending"}
             </td>
             <td style={{ border: '1px solid purple', padding: '8px' }}>{todo?.user?.name}</td>
